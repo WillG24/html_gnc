@@ -1,96 +1,911 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URRING</title>
+  <style>
+    .header {
+    background-color: #FED000;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    display: flex;
+    justify-content: center; 
+    z-index: 1000; 
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0; 
+}
+
+.logo-item {
+    position: absolute;
+    left: 100px;
+    top: 0px;
+    transform: translateX(-50%); 
+    width: 90px;
+    height: 90px;
+}
+
+.logo {
+    max-width: 100%; 
+    height: auto; 
+    width: auto; 
+}
+
+@media (max-width: 1200px) {
+    .logo {
+        max-width: 80px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .logo {
+        max-width: 60px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        max-width: 50px; 
+    }
+}
+
+
+.header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+.navigation__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; 
+    gap: 1.5em; 
+}
+
+.navigation__link {
+    color: inherit;
+    display: block;
+    padding-left: 1em;
+    padding-right: 1em;
+    text-decoration: none;
+}
+
+.navigation__link--is-active {
+    background-color: #fffbfb;
+    border-radius: 999em;
+    color: #fff;
+}
+
+body {
+    padding-top: 100px; 
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.75;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    will-change: transform;
+}
+
+.sticky--top {
+    top: 0;
+}
+
+* {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+html {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.header::after {
+    bottom: 0;
+    -webkit-box-shadow: 0 0.0625em 0.5em rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.0625em 0.5em rgba(0, 0, 0, 0.3);
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    -webkit-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    z-index: -1;
+}
+
+.header.is-active::after {
+    opacity: 1;
+}
+
+.main {
+    padding-top: 6em;
+    padding-bottom: 6em;
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center; 
+}
+
+.navigation__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navigation__list--inline {
+    display: flex;
+    gap: 1.5em;
+}
+
+.navigation__link {
+    color: inherit;
+    display: block;
+    padding-left: 1em;
+    padding-right: 1em;
+    text-decoration: none;
+}
+
+.navigation__link--is-active {
+    background-color: #000;
+    border-radius: 999em;
+    color: #fff;
+}
+
+p {
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+enzo {
+    width: 100%;
+    height: 8rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+enzo > div {
+    width: calc(100% - 3rem);
+    max-width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+#title {
+    width: 100%;
+}
+
+#title .parent {
+    line-height: 1em;
+    color: #666;
+}
+
+#title .name {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    mix-blend-mode: difference;
+}
+
+#reference {
+    display: flex;
+}
+
+#reference > a {
+    color: #444;
+}
+
+#reference > a + a {
+    margin-left: 1rem;
+}
+
+#categories {
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+    padding-top: 2rem; 
+    width: calc(100% - 3rem);
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 1.5rem;
+}
+
+#categories > article {
+    width: 100%;
+    height: 4rem;
+    padding: 0 1.5rem;
+    background-color: #FFF;
+    border-radius: 1rem;
+    line-height: 4rem;
+    transition: all 100ms ease-out;
+    cursor: pointer;
+}
+
+#categories > article:hover {
+    box-shadow: 0 16px 16px -4px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+}
+
+#categories article.active {
+    font-weight: bold;
+    color: #FED000; 
+}
+
+content, #categories {
+    width: calc(100% - 3rem);
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 1.5rem;
+}
+
+content > article {
+    width: 100%;
+    height: 32px;
+    padding: 1rem;
+    background-color: #FFF;
+}
+
+content > figure {
+    width: 100%;
+    margin: 0;
+    background-color: #FFF;
+    background-size: cover;
+    border-radius: 1rem;
+    transition: all 100ms ease-out;
+    position: relative; 
+}
+
+content > figure:hover {
+    box-shadow: 0 16px 16px -4px rgba(0, 0, 0, 0.3);
+    transform: scale(1.02);
+}
+
+content > figure:after {
+    content: "";
+    padding-bottom: 100%;
+    display: block;
+}
+
+content > figure > figcaption {
+    margin: 1rem;
+    color: #FFF;
+    font-size: 1.25em;
+    position: absolute;
+}
+
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.main {
+    width: 100%;
+}
+
+.fondoP {
+    width: 100%; 
+    margin: 0; 
+    padding: 0; 
+    position: relative;
+    padding-top: 0px; 
+}
+
+.fondoP img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    filter: brightness(70%); 
+    position: relative; 
+}
+
+.fondoP::before {
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0, 0, 0, 0.5); 
+    pointer-events: none; 
+}
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.solar-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.solar-section h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: left;
+    position: relative;
+}
+
+.yellow-card {
+    background-color: #d4c388;
+}
+
+.black-card {
+    background-color: #000;
+    color: #fff;
+}
+
+.image-card {
+    background: url('card1.jpeg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.card p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.learn-more-btn {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.yellow-card .learn-more-btn,
+.yellow-card p {
+    color: #fff;
+    border-color: #fff;
+}
+
+.learn-more-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+  
+
+@media (min-width: 1024px) {
+    .contact-section p {
+        font-size: 16px;
+    }
+
+    .contact-section h2 {
+        font-size: 24px;
+    }
+
+    .btn {
+        font-size: 18px;
+    }
+}
+.container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+@keyframes load {
+    from {
+        width: 0%
+    }
+}
+
+@-webkit-keyframes load {
+    from {
+        width: 0%
+    }
+}
+
+@-moz-keyframes load {
+    from {
+        width: 0%
+    }
+}
+
+@-o-keyframes load {
+    from {
+        width: 0%
+    }
+}
+
+.bar {
+    background-color: #EEE;
+    padding: 2px;
+    border-radius: 15px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #FFF;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.bar::before {
+    content: attr(data-skill);
+    background-color: #FED000;
+    display: inline-block;
+    padding: 5px 0 5px 10px;
+    border-radius: inherit;
+    animation: load 2s 0s;
+    -webkit-animation: load 2s 0s;
+    -moz-animation: load 2s 0s;
+    -o-animation: load 2s 0s;
+}
+
+.bar.front::before {
+    background-color:#FED000;
+}
+
+.bar.back::before {
+    background-color: #FED000;
+}
+
+.bar.learning::before {
+    width: calc(102% - 10px);
+}
+
+.bar.basic::before {
+    width: calc(100% - 10px);
+}
+
+.bar.intermediate::before {
+    width: calc(90% - 10px);
+}
+
+.bar.advanced::before {
+    width: calc(102% - 10px);
+}
+
+.bar.expert::before {
+    width: calc(100% - 10px);
+}
+
+
+.navigation__link--active {
+    background-color: #000;
+    border-radius: 999em;
+    color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    background: #111;
+  }
+  
+  .container-footer {
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 940px;
+    padding-bottom: 40px;
+    padding-top: 70px;
+  }
+  
+  .footer-column {
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .footer-column img.failory-logo-image {
+    border-width: 0;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    max-width: 100%;
+    vertical-align: middle;
+  }
+  
+  .footer-failory-name {
+    color: #FFFFFF;
+    font-family: Lato, sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.1em;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-top: 24px;
+  }
+  
+  .footer-description-failory {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: Lato, sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    letter-spacing: .5px;
+    line-height: 1.5em;
+    margin-bottom: 16px;
+    margin-top: 15px;
+  }
+  
+  .footer-titles {
+    color: #FFFFFF;
+    font-family: Lato, sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.1em;
+    margin-top: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .footer-links {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: Lato, sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    letter-spacing: .5px;
+    line-height: 1.8em;
+    margin-top: 2px;
+    margin-bottom: 16px;
+  }
+  
+  .footer-social-network-icons {
+    display: inline-block;
+    margin-right: 8px;
+    margin-top: 10px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+  
+  .footer-social-network-icons:hover {
+    opacity: 1;
+  }
+  
+  .footer-description {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: Lato, sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    letter-spacing: .5px;
+    line-height: 1.5em;
+    margin-bottom: 16px;
+    margin-top: 15px;
+  }
+  
+  .link-email-footer {
+    font-weight: 700;
+  }
+  
+  @media (min-width: 769px) {
+    .w-row {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+    
+    .footer-column {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .w-row {
+      display: block;
+    }
+    
+    .footer-column {
+      width: 100%;
+      padding-bottom: 20px;
+    }
+  
+    .footer-column img.failory-logo-image,
+    .footer-failory-name {
+      text-align: center;
+      margin-left: 0;
+    }
+    
+    .footer-titles {
+      text-align: center;
+    }
+  
+    .footer-social-network-icons {
+      text-align: center;
+      display: block;
+      margin: 10px auto;
+    }
+  }
+
+  .footer-column {
+    margin-bottom: 30px; 
+  }
+  
+  .w-col-8 .w-row {
+    margin-bottom: 30px; 
+  }
+  
+  .footer-titles {
+    margin-bottom: 15px; 
+  }
+  
+  .footer-links,
+  .footer-description {
+    margin-bottom: 15px; 
+  }
+  
+  .column-center-mobile {
+    margin-top: 20px;  
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+.competence-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+h4 {
+    font-size: 3rem;
+    color:#FED000;
+    margin-bottom: 20px;
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    background-color:#FED000;
+    border-radius: 50%;
+}
+
+.info-box {
+    background-color:#d4c388;
+    padding: 30px;
+    width: 50%;
+    border-radius: 15px;
+}
+
+.info-box p {
+    color: #000000;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+
+  </style>
+</head>
+<body>
+    <header class="header sticky sticky--top js-header">
+        <div class="grid">
+            <nav class="navigation">
+                <ul class="navigation__list navigation__list--inline">
+                  <li class="navigation__item"><a href="#" class="navigation__link navigation__link--active">Inicio</a></li>
+                    <li class="navigation__item"><a href="#nosotros" class="navigation__link">Contactos</a></li>
+                    <li class="navigation__item logo-item">
+                        <a href="#">
+                        </a>
+                    </li>
+                    <li class="navigation__item"><a href="#catalogo" class="navigation__link">Catalogo</a></li>
+                    <li class="navigation__item"><a href="#clientes" class="navigation__link">Clientes</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+      <div class="fondoP">
+        <img src="retro1.jpeg" width="200px" height="30px">
+    </div> 
+    <br></br>
+    <section class="competence-section">
+      <div class="text-container">
+          <h4>Es momento de hacer realidad tus sueños.</h4>
+          <div class="circle"></div>
+      </div>
+      <div class="info-box">
+        <p>Somos expertos en crear tus mas grandes proyectos, estamos listos para empezar a construir tus sueños.</p>
+
+      </div>
+  </section>
+    <section class="solar-section">
+      <h1>Tus deseos son nuestras ordenes.</h1>
+      <div class="card-container">
+          <div class="card yellow-card">
+              <h2>Mantenimiento</h2>
+              <p>Hacemos que tus deseos sean eternos.</p>
+              <button class="learn-more-btn" onclick="document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });">Contactanos</button>
+          </div>
+          <div class="card image-card">
+              <h2>Construccion</h2>
+              <p>Construimos tus sueños.</p>
+             <button class="learn-more-btn" onclick="document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });">Contactanos</button>
+          </div>
+          <div class="card black-card">
+              <h2>Diseño</h2>
+              <p>Diseñamos tus pensamientos desde la base.</p>
+              <button class="learn-more-btn" onclick="document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });">Contactanos</button>
+          </div>
+          <div class="card yellow-card">
+              <h2>Contactanos</h2>
+              <p>Contactanos para hacer tus expectativas una realidad.</p>
+              <button class="learn-more-btn" onclick="document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });">Contactanos</button>
+         </div>
+      </div>
+  </section>
+<div></div>
+<div class="container">
+  <div class="fonta">
+    <div id="clientes"></div>
+    <div class="footer">
+      <div class="sobre-nosotros">
+        <h4 style="color: #FFF; font-size: 24px;">Sobre nosotros</h4>
+        <p style="color: #FFF; font-size: 18px;">G&C Constructions and Logistics es un líder en la industria de la construcción, ofreciendo soluciones completas para proyectos de todas las escalas.</p>
+    </div>
+</div>
+  <div class="bar learning" 
+       data-skill="Clientes Satisfechos"></div>
+  <div class="bar back basic" 
+       data-skill="Altos estandares de calidad"></div>
+  <div class="bar back intermediate" 
+       data-skill="Mejor relacion costo beneficio"></div>
+  <div class="bar front advanced" 
+       data-skill="Confiabilidad"></div>
+  <div class="bar front expert" 
+       data-skill="Rapidez y Eficiencia"></div>
+</div>
+<div id="catalogo"></div>
+<section id="categories">
+  <article>Maquinas</article>
+  <article>Trabajos</article>
+</section>
+<content>
+  <figure data-category="maquinas" style="background-image: url(mini1.jpeg)">
+    <figcaption>Mini Cargador</figcaption>
+  </figure>
+  <figure data-category="maquinas" style="background-image: url(concretera1.jpeg)">
+    <figcaption>Concretera</figcaption>
+  </figure>
+  <figure data-category="maquinas" style="background-image: url(retro2.jpeg)">
+    <figcaption>Retroexcavadora</figcaption>
+  </figure>
+  <figure data-category="maquinas" style="background-image: url(compactadoras1.jpeg)">
+    <figcaption>Compactadora</figcaption>
+  </figure>
+  <figure data-category="maquinas" style="background-image: url(mini2.jpeg)">
+    <figcaption>Mini Cargador</figcaption>
+  </figure>
+  <figure data-category="trabajos" style="background-image: url(trabajo1.jpeg)">
+  </figure>
+  <figure data-category="trabajos" style="background-image: url(trabajo2.jpeg)">
+  </figure>
+  <figure data-category="trabajos" style="background-image: url(trabajo3.jpeg)">
+  </figure>
+  <figure data-category="trabajos" style="background-image: url(trabajo4.jpeg)">
+  </figure>
+  <figure data-category="trabajos" style="background-image: url(trabajo7.jpeg)">
+  </figure>
+  <figure data-category="trabajos" style="background-image: url(trabajo6.jpeg)">
+  </figure>
+  <figure data-category="trabajos" style="background-image: url(trabajo8.jpeg)">
+  </figure>
+</content>
+
+<div class="container-footer w-container">
+  <div class="w-row">
+    <div class="footer-column w-clearfix w-col w-col-4">
+      <img src="logoGNC.png" alt="" width="40" class="failory-logo-image">
+      <h3 class="footer-failory-name">G&C Constructions and Logistics</h3>
+      <p class="footer-description-failory">Tu constructora de confianza.</p>
+    </div>
+    <div class="footer-column w-col w-col-8">
+      <div class="w-row">
+        <div class="w-col w-col-8">
+          <div class="w-row">
+            <div class="w-col w-col-7 w-col-small-6 w-col-tiny-7">
+
+            <div class="w-col w-col-5 w-col-small-6 w-col-tiny-5">
+              <h3 class="footer-titles">Contacto</h3>
+              <p class="footer-links">+503 7465 9286</p>
+            </div>
+          </div>
+        </div>
+        <div id="contacto" class="container-footer w-container">
+
+        
+
+      
+<script>
+document.querySelectorAll('#categories article').forEach(item => {
+    item.addEventListener('click', function() {
+        const category = this.textContent.toLowerCase();
+        
+        document.querySelectorAll('#categories article').forEach(article => {
+            article.classList.remove('active');
+        });
+        
+        this.classList.add('active');
+
+        document.querySelectorAll('content figure').forEach(figure => {
+            if (figure.getAttribute('data-category') === category) {
+                figure.style.display = 'block';
+            } else {
+                figure.style.display = 'none';
+            }
+        });
+    });
+});
+
+
+
+
+</script>
+</body>
 </html>
